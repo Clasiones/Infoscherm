@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Atelier Transformaties - Infoscherm</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">AT</div>
+        <div><h1>ATELIER TRANSFORMATIES</h1><p>Infoscherm Kortenberg</p></div>
+      </div>
+      <div class="clock-block">
+        <div id="clock">--:--</div>
+        <div><span id="date">--</span><span class="dot">•</span><span id="week">Week --</span></div>
+      </div>
+      <button id="adminOpen" class="admin-button" type="button">Beheer</button>
+    </header>
+
+    <main class="dashboard">
+      <section class="hero-card">
+        <div id="carousel" class="carousel">
+          <div id="slide" class="slide placeholder-slide">
+            <div class="placeholder-content"><div class="camera-icon">▣</div><h2>Fotocarrousel</h2><p>Voeg afbeeldingen toe via Beheer</p></div>
+          </div>
+          <div id="photoCounter" class="photo-counter">0 foto's</div>
+        </div>
+      </section>
+
+      <aside class="side-column">
+        <section class="card delivery-card">
+          <div class="card-label">DEZE WEEK</div>
+          <h2>Levering kar lossen</h2>
+          <div id="deliveryPerson" class="delivery-person">Johan</div>
+          <div class="delivery-note">Verantwoordelijke medewerker</div>
+        </section>
+
+        <section class="card weather-card">
+          <div class="card-head"><h2>Weer Kortenberg</h2><span id="weatherStatus" class="status-dot"></span></div>
+          <div class="weather-now"><span id="weatherIcon" class="weather-icon">☁</span><span id="temperature">--°</span></div>
+          <div id="weatherText" class="weather-text">Weerbericht laden...</div>
+          <div class="weather-details"><span>Wind <b id="wind">-- km/u</b></span><span>Vandaag <b id="range">--° / --°</b></span></div>
+        </section>
+
+        <section class="card radio-card">
+          <div><div class="card-label">LIVE RADIO</div><h2>Studio Brussel</h2><p id="radioState">Selecteer afspelen om te luisteren</p></div>
+          <button id="radioToggle" class="radio-button" type="button"><span id="radioIcon">▶</span><span id="radioLabel">Afspelen</span></button>
+          <audio id="radio" preload="none"><source src="https://icecast.vrtcdn.be/stubru-high.mp3" type="audio/mpeg"></audio>
+        </section>
+      </aside>
+    </main>
+
+    <footer class="footer">
+      <section class="contacts">
+        <h2>Verantwoordelijken</h2>
+        <div class="contact-list">
+          <div><b>Philippe Van Deun</b><span>0496 20 63 70</span></div>
+          <div><b>Kristof Claesen</b><span>0479 85 45 87</span></div>
+          <div><b>Claudiu Pintilescu</b><span>0479 85 67 24</span></div>
+        </div>
+      </section>
+      <section class="intranet">
+        <img src="assets/intranet-qr.png" alt="QR-code naar intranet">
+        <div><h2>Intranet</h2><p>Scan de QR-code voor rechtstreekse toegang</p><a href="https://dieteren.sharepoint.com/sites/intranet" target="_blank" rel="noopener">Open intranet</a></div>
+      </section>
+    </footer>
+  </div>
+
+  <div id="adminModal" class="modal" aria-hidden="true">
+    <div class="modal-panel">
+      <div class="modal-head"><div><h2>Beheerpaneel</h2><p>Wijzigingen worden automatisch op dit toestel opgeslagen.</p></div><button id="adminClose" class="close-button" type="button">×</button></div>
+      <div class="admin-grid">
+        <section class="admin-section">
+          <h3>Levering kar lossen</h3>
+          <label for="personSelect">Verantwoordelijke medewerker</label>
+          <select id="personSelect"><option>Johan</option><option>Benjamin</option><option>Geert</option><option>Ayman</option><option>Gianni</option><option>Dylan</option><option>Jef</option></select>
+          <div class="saved-message" id="personSaved">Opgeslagen</div>
+        </section>
+        <section class="admin-section">
+          <h3>Fotocarrousel</h3>
+          <label for="photoFiles">Afbeeldingen vanaf dit toestel</label>
+          <input id="photoFiles" type="file" accept="image/*" multiple>
+          <div class="or">of</div>
+          <label for="photoUrl">Rechtstreekse afbeeldingslink</label>
+          <div class="url-row"><input id="photoUrl" type="url" placeholder="https://..."><button id="addUrl" type="button">Toevoegen</button></div>
+          <a class="teams-link" href="https://teams.microsoft.com/l/channel/19%3AlcEXIMNuUfLt24tWUrb01PBgXrYP41oS8g-ufjNVxyo1%40thread.tacv2/Infoscherm?groupId=f559a539-bc06-49de-9767-7fd25a029b94&tenantId=aa827651-b9cd-4396-bf96-1f28c2a280bc&ngc=true" target="_blank" rel="noopener">Open map Infoscherm in Teams</a>
+          <div id="photoList" class="photo-list"></div>
+          <button id="clearPhotos" class="danger-button" type="button">Alle foto's verwijderen</button>
+        </section>
+        <section class="admin-section">
+          <h3>Weergave</h3>
+          <label for="intervalSelect">Wisseltijd fotocarrousel</label>
+          <select id="intervalSelect"><option value="30000">30 seconden</option><option value="20000">20 seconden</option><option value="60000">60 seconden</option></select>
+          <button id="fullscreenButton" class="secondary-button" type="button">Volledig scherm</button>
+          <button id="resetButton" class="danger-button" type="button">Standaardinstellingen herstellen</button>
+        </section>
+      </div>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
